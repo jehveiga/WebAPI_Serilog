@@ -21,6 +21,9 @@ builder.Services.AddSwaggerGen();
 Log.Logger = new LoggerConfiguration()
                     .ReadFrom.Configuration(builder.Configuration).CreateLogger();
 
+// Adicionando o Serilog no container de serviços, para ser usado na requisição
+builder.Host.UseSerilog();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +32,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Adicionando o serviço do Serilog no Pipeline da requisição, como um middleware
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
