@@ -9,11 +9,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+// Exemplo de configuração direto na program.cs se desejar use método de extensão
+//Log.Logger = new LoggerConfiguration()
+//    .MinimumLevel.Information()
+//    .WriteTo.Console()
+//    .WriteTo.File("Logs/MyLogApplication-.txt", rollingInterval: RollingInterval.Day)
+//    .CreateLogger();
+
+// Exemplo da configuracao ficar na appsettings.json
 Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Information()
-    .WriteTo.Console()
-    .WriteTo.File("Logs/MyLogApplication-.txt", rollingInterval: RollingInterval.Day)
-    .CreateLogger();
+                    .ReadFrom.Configuration(builder.Configuration).CreateLogger();
 
 var app = builder.Build();
 
