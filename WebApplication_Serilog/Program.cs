@@ -1,4 +1,7 @@
+using NpgsqlTypes;
 using Serilog;
+using Serilog.Sinks.PostgreSQL;
+using Serilog.Sinks.PostgreSQL.ColumnWriters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +11,6 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 
 // Exemplo de configuração direto na program.cs se desejar use método de extensão
 //Log.Logger = new LoggerConfiguration()
